@@ -10,7 +10,7 @@ namespace PacMan
         {
             string[] file = File.ReadAllLines(filePath);
 
-            int width = file.Max(line => line.Length); // максимальная длина строки
+            int width = file.Max(line => line.Length);
             int height = file.Length;
 
             char[,] map = new char[width, height];
@@ -22,7 +22,7 @@ namespace PacMan
                     if (x < file[y].Length)
                         map[x, y] = file[y][x];
                     else
-                        map[x, y] = ' '; // заполнитель
+                        map[x, y] = ' ';
                 }
             }
 
@@ -40,8 +40,26 @@ namespace PacMan
                 {
                     Console.Write(map[x, y]);
                 }
-                Console.WriteLine(); // перенос строки
+                Console.WriteLine();
             }
         }
+
+
+        public static int MaxScore(char[,] map)
+        {
+            int score = 0;
+
+            for (int y = 0; y < map.GetLength(1); y++)
+            {
+                for (int x = 0; x < map.GetLength(0); x++)
+                {
+                    if (map[x, y] == '.')
+                        score++;
+                }
+            }
+
+            return score;
+        }
+
     }
 }

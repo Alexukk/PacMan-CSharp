@@ -11,9 +11,15 @@
             int pacx = 1;
             int pacy = 1;
             int score = 0;
+            int maxScore = mapUtils.MaxScore(map);
 
             while (true)
             {
+                if (score == maxScore)
+                {
+                    GameUtils.EndScreen();
+                    break;
+                }
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Blue;
                 mapUtils.DrawMap(map);
@@ -31,7 +37,6 @@
                 HandleInput(map, ref pacx, ref pacy, key, ref score);
 
                 Console.SetCursorPosition(map.GetLength(0) + 5, 4);
-                Console.Write($"Last key: {key.KeyChar}");
             }
         }
 
