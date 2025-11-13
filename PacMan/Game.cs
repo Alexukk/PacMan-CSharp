@@ -1,4 +1,7 @@
-﻿namespace PacMan
+﻿using System.Threading;
+
+
+namespace PacMan
 {
     internal class Game
     {
@@ -21,6 +24,7 @@
                     break;
                 }
                 Console.Clear();
+
                 Console.ForegroundColor = ConsoleColor.Blue;
                 mapUtils.DrawMap(map);
 
@@ -34,9 +38,11 @@
 
                 Console.ForegroundColor = ConsoleColor.Red;
                 key = Console.ReadKey(true);
-                HandleInput(map, ref pacx, ref pacy, key, ref score);
 
+                HandleInput(map, ref pacx, ref pacy, key, ref score);
                 Console.SetCursorPosition(map.GetLength(0) + 5, 4);
+
+
             }
         }
 

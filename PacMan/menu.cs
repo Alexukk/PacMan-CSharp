@@ -12,6 +12,7 @@ namespace PacMan
         {
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("");
                 Console.WriteLine("1. Start Game");
                 Console.WriteLine("2. Exit");
@@ -63,17 +64,14 @@ namespace PacMan
             try
             {
                 int answer = int.Parse(choice.KeyChar.ToString());
-                if (answer >= 0 && answer < mapsPath.Length)
+                if (answer >= 1 && answer <= mapsPath.Length)
                 {
                     Game.Start(mapsPath[answer - 1] + ".txt");
-                }
-                else
-                {
-                    Console.WriteLine("Please Enter a valid option.");
                 }
             }
             catch (Exception)
             {
+                Console.WriteLine();
                 Console.WriteLine("Please Enter a valid option.");
             }
 
