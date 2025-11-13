@@ -6,7 +6,7 @@ namespace PacMan
     {
         static void Main(string[] args)
         {
-            string[] mapsPath = ["map", "simple", "medium", "hard", "crazy"];
+            string[] mapsPath = ["simple", "medium", "hard", "crazy"];
 
             menu.StartText();
             menu.ShowOptions(mapsPath);

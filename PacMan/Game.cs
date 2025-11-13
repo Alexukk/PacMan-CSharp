@@ -10,7 +10,7 @@ namespace PacMan
             Console.CursorVisible = false;
             ConsoleKeyInfo key = new ConsoleKeyInfo('w', ConsoleKey.W, false, false, false);
             char[,] map = mapUtils.ReadMap(map_path);
-
+            int lifes = 5;
             int pacx = 1;
             int pacy = 1;
             int score = 0;
@@ -18,12 +18,20 @@ namespace PacMan
 
             while (true)
             {
+                Console.Clear();
+
+                HandleInput(map, ref pacx, ref pacy, key, ref score, ref lifes);
+
                 if (score == maxScore)
                 {
-                    GameUtils.EndScreen();
+                    GameUtils.ShowWonScreen();
                     break;
                 }
-                Console.Clear();
+                if (lifes <= 0)
+                {
+                    GameUtils.ShowGameOverScreen();
+                    break;
+                }
 
                 Console.ForegroundColor = ConsoleColor.Blue;
                 mapUtils.DrawMap(map);
@@ -36,17 +44,15 @@ namespace PacMan
                 Console.SetCursorPosition(map.GetLength(0) + 5, 2);
                 Console.Write($"Score: {score}");
 
+                Console.SetCursorPosition(map.GetLength(0) + 5, 3);
+                ShowLifes(ref lifes);
                 Console.ForegroundColor = ConsoleColor.Red;
                 key = Console.ReadKey(true);
-
-                HandleInput(map, ref pacx, ref pacy, key, ref score);
-                Console.SetCursorPosition(map.GetLength(0) + 5, 4);
-
-
+                Console.SetCursorPosition(map.GetLength(0) + 5, 5);
             }
         }
 
-        private static void HandleInput(char[,] map, ref int pacx, ref int pacy, ConsoleKeyInfo key, ref int score)
+        private static void HandleInput(char[,] map, ref int pacx, ref int pacy, ConsoleKeyInfo key, ref int score, ref int lifes)
         {
             int newX = pacx;
             int newY = pacy;
@@ -69,8 +75,23 @@ namespace PacMan
 
                 pacx = newX;
                 pacy = newY;
+            } else
+            {
+                lifes--;
             }
         }
+
+        private static void ShowLifes(ref int lifes)
+        {
+            Console.Write("Lifes Left:");
+            for (int i = 0; i < lifes; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("*");
+                Console.ResetColor();
+            }
+        }
+
 
     }
 }

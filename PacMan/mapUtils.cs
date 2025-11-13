@@ -38,6 +38,12 @@ namespace PacMan
             {
                 for (int x = 0; x < width; x++)
                 {
+                    if (map[x, y] == '#')
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                    else if (map[x, y] == '.')
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                    else
+                        Console.ResetColor();
                     Console.Write(map[x, y]);
                 }
                 Console.WriteLine();
