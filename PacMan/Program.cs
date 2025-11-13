@@ -6,8 +6,10 @@ namespace PacMan
     {
         static void Main(string[] args)
         {
-            
-            Game.Start("map.txt");
+            string[] mapsPath = ["map", "simple", "medium", "hard", "crazy"];
+
+            menu.StartText();
+            menu.ShowOptions(mapsPath);
 
         }
     }
