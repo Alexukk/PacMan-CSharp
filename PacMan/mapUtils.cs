@@ -1,57 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using System.Linq;
 
 namespace PacMan
 {
     internal class mapUtils
     {
-
-
-
-
         public static char[,] ReadMap(string filePath)
         {
             string[] file = File.ReadAllLines(filePath);
 
-            char[,] map = new char[maxLengthOfLine(file), file.Length];
+            int width = file.Max(line => line.Length); // максимальная длина строки
+            int height = file.Length;
 
-            for (int y = 0; y < map.GetLength(1); y++)
+            char[,] map = new char[width, height];
+
+            for (int y = 0; y < height; y++)
             {
-                for (int x = 0; x < map.GetLength(0); x++)
+                for (int x = 0; x < width; x++)
                 {
                     if (x < file[y].Length)
                         map[x, y] = file[y][x];
                     else
-                        map[x, y] = ' '; // или другой символ-заполнитель
+                        map[x, y] = ' '; // заполнитель
                 }
             }
+
             return map;
-
-
-        }
-
-        private static int maxLengthOfLine(string[] lines)
-        { 
-            int maxLength = lines[0].Length;
-
-            foreach (string line in lines)
-            {
-                if (line.Length > maxLength)
-                {
-                    maxLength = line.Length;
-                }
-            }
-            return maxLength;
         }
 
         public static void DrawMap(char[,] map)
         {
+            int width = map.GetLength(0);
+            int height = map.GetLength(1);
 
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    Console.Write(map[x, y]);
+                }
+                Console.WriteLine(); // перенос строки
+            }
         }
-
     }
 }

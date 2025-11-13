@@ -6,8 +6,15 @@
         {
             char[,] map = null;
             map = mapUtils.ReadMap(map_path);
-            Console.WriteLine(map);
-            Console.ReadKey();
+            mapUtils.DrawMap(map);
+             
+            while (true)
+            {
+                Console.SetCursorPosition(1, 1);
+                Console.WriteLine('@');
+
+                Thread.Sleep(500);
+            }
 
         }
     }
