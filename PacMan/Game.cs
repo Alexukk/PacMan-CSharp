@@ -34,26 +34,35 @@
 
         private static void HandleInput(char[,] map, ref int pacx, ref int pacy, ConsoleKeyInfo key)
         {
+            int newX = pacx;
+            int newY = pacy;
 
             if (key.Key == ConsoleKey.UpArrow)
             {
-                pacy--;
+                newY--;
             }
             else if (key.Key == ConsoleKey.DownArrow)
             {
-                pacy++;
+                newY++;
             }
             else if (key.Key == ConsoleKey.LeftArrow)
             {
-                pacx--;
+                newX--;
             }
             else if (key.Key == ConsoleKey.RightArrow)
             {
-                pacx++;
+                newX++;
             }
 
-
+            if (newX >= 0 && newX < map.GetLength(0) &&
+                newY >= 0 && newY < map.GetLength(1) &&
+                map[newX, newY] != '#')
+            {
+                pacx = newX;
+                pacy = newY;
+            }
         }
+
     }
 }
 
